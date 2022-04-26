@@ -2,9 +2,8 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
-
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
@@ -21,16 +20,15 @@ RSpec.configure do |config|
 
   config.filter_rails_from_backtrace!
 
-
-
   Capybara.register_driver :headless do |app|
     Capybara::Selenium::Driver.new app,
-      browser: :chrome,
-      clear_session_storage: true,
-      clear_local_storage: true,
-      capabilities: [Selenium::WebDriver::Chrome::Options.new(
-        args: %w[headless disable-gpu no-sandbox window-size=1024,768],
-      )]
+                                   browser: :chrome,
+                                   clear_session_storage: true,
+                                   clear_local_storage: true,
+                                   capabilities: [Selenium::WebDriver::Chrome::Options.new(
+                                     args: %w[headless disable-gpu no-sandbox
+                                              window-size=1024,768]
+                                   )]
   end
 
   config.before(:each, type: :system) do
@@ -42,5 +40,4 @@ RSpec.configure do |config|
     # Can be switched to :chrome if you want to see it working
     driven_by :headless
   end
-
 end
